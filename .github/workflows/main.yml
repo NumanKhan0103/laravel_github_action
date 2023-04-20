@@ -31,7 +31,7 @@ jobs:
     #   run: npm run build
     
     - name: Clear Config , view and route cache
-      run: |
+      run:  |
           php artisan config:clear
           php artisan view:clear
           php artisan route:clear
@@ -49,7 +49,7 @@ jobs:
     #   run: php artisan optimize:clear
 
     - name: Cache Config, view and routes
-      run: |
+      run:  |
           php artisan config:cache
           php artisan view:cache
           php artisan route:cache
