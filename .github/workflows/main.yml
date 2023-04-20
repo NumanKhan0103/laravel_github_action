@@ -10,7 +10,69 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2.3.2
+
+    # - name: Install Dependencies
+    #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist 
+
+    - name: Install Node
+      run:  |
+          npm install
+          npm run build
     
+
+
+    # - name: compile all your assets including a source map
+    #   run: npm run prod
+
+    # - name: Build assets
+    #   run: npm run dev 
+
+    # - name: Run Vite Engine to compiles and optimizes the project's source code into a production-ready format. This  minifying and bundling JavaScript and CSS files, optimizing images, and other tasks necessary for deployment.
+    #   run: npm run build
+    
+    - name: Clear Config , view and route cache
+      run: |
+          php artisan config:clear
+          php artisan view:clear
+          php artisan route:clear
+          php artisan optimize:clear
+
+      
+
+    # - name: Clear view  Cache
+    #   run: php artisan view:clear
+
+    # - name: Clear route Cache
+    #   run: php artisan route:clear
+
+    # - name: Clearing cached bootstrap files
+    #   run: php artisan optimize:clear
+
+    - name: Cache Config, view and routes
+      run: |
+            php artisan config:cache
+            php artisan view:cache
+            php artisan route:cache
+
+    # - name: Cache View 
+    #   run: php artisan view:cache
+
+    # - name: Cache Route 
+    #   run: php artisan route:cache
+
+    
+    # second tutorial command check it 
+    - name: Create deployment artifact
+      env:
+          GITHUB_SHA: ${{ github.sha }}
+      run: tar -csf *${GITHUB_SHA}*.tar.gz --exclude.*.git --exclude=node_modules *
+
+    - name: store artifact for distribution
+      uses: actions/upload-artifact@v2
+      with:
+            name: app-build
+            path: ${{ github.sha }}.tar.gz
+
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
