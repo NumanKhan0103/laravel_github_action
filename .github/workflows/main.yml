@@ -30,35 +30,26 @@ jobs:
     # - name: Run Vite Engine to compiles and optimizes the project's source code into a production-ready format. This  minifying and bundling JavaScript and CSS files, optimizing images, and other tasks necessary for deployment.
     #   run: npm run build
     
-    - name: Clear Config , view and route cache
-      run:  |
-          php artisan config:clear
-          php artisan view:clear
-          php artisan route:clear
-          php artisan optimize:clear
+    - name: Clear Config cache
+      run: php artisan config:clear
 
-      
+    - name: Clear view  Cache
+      run: php artisan view:clear
 
-    # - name: Clear view  Cache
-    #   run: php artisan view:clear
+    - name: Clear route Cache
+      run: php artisan route:clear
 
-    # - name: Clear route Cache
-    #   run: php artisan route:clear
-
-    # - name: Clearing cached bootstrap files
-    #   run: php artisan optimize:clear
+    - name: Clearing cached bootstrap files
+      run: php artisan optimize:clear
 
     - name: Cache Config, view and routes
-      run:  |
-          php artisan config:cache
-          php artisan view:cache
-          php artisan route:cache
+      run: php artisan config:cache
 
-    # - name: Cache View 
-    #   run: php artisan view:cache
+    - name: Cache View 
+      run: php artisan view:cache
 
-    # - name: Cache Route 
-    #   run: php artisan route:cache
+    - name: Cache Route 
+      run: php artisan route:cache
 
     
     # second tutorial command check it 
