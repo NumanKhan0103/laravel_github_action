@@ -50,9 +50,9 @@ jobs:
 
     - name: Cache Config, view and routes
       run: |
-            php artisan config:cache
-            php artisan view:cache
-            php artisan route:cache
+          php artisan config:cache
+          php artisan view:cache
+          php artisan route:cache
 
     # - name: Cache View 
     #   run: php artisan view:cache
